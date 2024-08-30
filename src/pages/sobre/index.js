@@ -1,10 +1,29 @@
-import { StatusBar, SafeAreaView , StyleSheet, Text, View, ScrollView } from "react-native";
+import { 
+  StatusBar, 
+  SafeAreaView, 
+  StyleSheet,
+  Text,
+  View,
+  Image,
+  ScrollView,
+  TouchableOpacity,
+  Dimensions 
+} from "react-native";
 
-export function Sobre() {
+import {widthPercentageToDP as wp, heightPercentageToDP as hp} from 'react-native-responsive-screen';
+const {height, width} = Dimensions.get("window")
+
+import { AntDesign } from '@expo/vector-icons';
+
+export function Sobre({ navigation }) {
   return (
     <SafeAreaView style={styles.container}>
       <StatusBar backgroundColor={"#005A7D"}/>
-        <ScrollView>
+        <ScrollView showsVerticalScrollIndicator={false}>
+          <TouchableOpacity style={styles.icon} onPress={ () => navigation.navigate('menuPrincipal') }>
+            <AntDesign name="arrowleft" size={30} color={"#000"}/>
+          </TouchableOpacity>
+
           <View style={styles.main}>
             <Text style={styles.title}>Sobre</Text>
 
@@ -18,29 +37,38 @@ export function Sobre() {
 
                 <View style={styles.devs}>
                   <View style={styles.boxDev}>
-                    <View style={styles.img}></View>
+                    <View style={styles.img}>
+                      <Image style={styles.img} source={require('../../assets/img/img_desenvolvedor_jonatas.jpg')} alt="Imagem do Desenvolvedor BackEnd"/>
+                    </View>
                     <Text style={styles.nameDev}>Jônatas Fernandes Silva</Text>
                   </View>
         
-                  <Text style={styles.text}>Desenvolvedor Fullstack/PO: Desenvolver o Back-End da aplicação e auxiliar no desenvolvimento do Front-End.</Text>
+                  <Text style={styles.text}>
+                    <Text style={styles.textStrong}>Desenvolvedor Fullstack/PO:</Text> Desenvolver o Back-End da aplicação e auxiliar no desenvolvimento do Front-End.</Text>
                 </View>
 
                 <View style={styles.devs}>
                   <View style={styles.boxDev}>
-                    <View style={styles.img}></View>
+                    <View style={styles.img}>
+                      <Image style={styles.img} source={require('../../assets/img/img_desenvolvedor_gustavo.jpg')} alt="Imagem do Desenvolvedor BackEnd"/>
+                    </View>
                     <Text style={styles.nameDev}>Gustavo Menezes</Text>
                   </View>
         
-                  <Text style={styles.text}>DBA/tech lead: Administrar, planejar e montar o banco de dados da aplicação além de auxiliar no desenvolvimento geral do sistema.</Text>
+                  <Text style={styles.text}>
+                    <Text style={styles.textStrong}>DBA/tech lead:</Text> Administrar, planejar e montar o banco de dados da aplicação além de auxiliar no desenvolvimento geral do sistema.</Text>
                 </View>
 
                 <View style={styles.devs}>
                   <View style={styles.boxDev}>
-                    <View style={styles.img}></View>
+                    <View style={styles.img}>
+                      <Image style={styles.img} source={require('../../assets/img/img_desenvolvedor_robert.jpg')} alt="Imagem do Desenvolvedor FrontEnd"/>
+                    </View>
                     <Text style={styles.nameDev}>Robert Michael Ávila</Text>
                   </View>
           
-                  <Text style={styles.text}>Desenvolvedor Fullstack/Designer: Desenvolver o Front-End da aplicação e auxiliar no desenvolvimento do Back-End. Projetar o design da aplicação</Text>
+                  <Text style={styles.text}>
+                    <Text style={styles.textStrong}>Desenvolvedor Fullstack/Designer:</Text> Desenvolver o Front-End da aplicação e auxiliar no desenvolvimento do Back-End. Projetar o design da aplicação</Text>
                 </View>
               </View>
             </View>
@@ -52,67 +80,71 @@ export function Sobre() {
 
 const styles = StyleSheet.create({
   container: {
-    flex: 1,
+    height: hp(100),
     justifyContent: "center",
     minWidth: "100%",
+    paddingHorizontal: wp(5),
     marginHorizontal: "auto",
     backgroundColor: "#fff"
   },
   main: {
-    paddingHorizontal: 10
+    width: wp(90)
   },
   title: {
     width: "100%",
     textAlign: "center",
-    fontSize: 40,
+    fontSize: hp(3.8),
     fontWeight: "700",
     color: "#003B52",
-    marginTop: 40,
-    marginBottom: 15
-  },
-  descrition: {
-    paddingHorizontal: 20
+    marginTop: hp(5),
+    marginBottom: hp(5)
   },
   subtitle: {
     width: "100%",
     textAlign: "justify",
-    fontSize: 30,
-    fontWeight: "700",
+    fontSize: hp(3),
+    fontWeight: "600",
     color: "#005A7D",
-    marginBottom: 20,
-    marginTop: 30
+    marginBottom: hp(3)
   },
   text: {
     width: "100%",
     textAlign: "justify",
-    fontSize: 22,
+    fontSize: hp(2.5),
     lineHeight: 35,
     color: "#333",
     marginBottom: 30
   },
   containerDevs: {
-    marginTop: 20
+    marginTop: hp(4)
   },
   devs: {
-    marginBottom: 20
+    marginBottom: hp(4)
   },
   boxDev: {
     alignItems: "center",
-    marginBottom: 30
+    marginBottom: hp(4)
   },
   img: {
-    width: "28%",
-    backgroundColor: "#000",
-    height: 100,
-    borderRadius: 100
+    width: 150,
+    height: 150,
+    borderRadius: 100,
+    elevation: 30,
+    backgroundColor: "#005A7D",
   },
   nameDev: {
     width: "100%",
     textAlign: "center",
-    fontSize: 24,
+    fontSize: hp(3),
     fontWeight: "700",
     color: "#005A7D",
     marginTop: 30
+  },
+  textStrong: {
+    fontWeight: "600",
+    color: "#005A7D"
+  },
+  icon: {
+    top: hp(4.5)
   }
-
 });

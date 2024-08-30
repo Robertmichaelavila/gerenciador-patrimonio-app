@@ -1,4 +1,17 @@
-import { StatusBar, StyleSheet, Text, View, TextInput ,TouchableOpacity } from "react-native";
+import { 
+  StatusBar, 
+  StyleSheet, 
+  Text, 
+  View, 
+  Dimensions
+} from "react-native";
+
+import {widthPercentageToDP as wp, heightPercentageToDP as hp} from 'react-native-responsive-screen';
+const {height, width} = Dimensions.get("window")
+
+import { Input } from "../../components/Form/input/Input";
+import { InputNumeric } from "../../components/Form/input/InputNumeric";
+import { Button } from "../../components/Form/button/Button"
 
 export function Perfil() {
   return (
@@ -11,48 +24,38 @@ export function Perfil() {
 
           <View style={styles.contentInput}>
             <View style={styles.boxInput}>
-              <Text style={styles.label}>Minha conta</Text>
-              <TextInput
-                  style={styles.input}
-                  minHeight= {30}
-                  maxLength={50}
-                  //onChangeText={onChangeNumber}
-                  placeholder="Nome completo"
+              <Text style={styles.label}>Nome Completo</Text>
+              <Input
+                minValue= {30}
+                maxValue={50}
+                placeholder={"Usuário123"}
               />
             </View>
 
             <View style={styles.boxInput}>
               <Text style={styles.label}>Email</Text>
-              <TextInput
-                  style={styles.input}
-                  minHeight= {10}
-                  maxLength={50}
-                  //onChangeText={onChangeNumber}
-                  placeholder="email@gmail.com"
+              <Input
+                minValue= {30}
+                maxValue={50}
+                placeholder={"email@gmail.com"}
+                keyboardtype={'email-address'}
+    
               />
             </View>
 
             <View style={styles.boxInput}>
               <Text style={styles.label}>Senha</Text>
-              <TextInput
-                  style={styles.input}
-                  minHeight= {1}
-                  maxLength={6}
-                  //onChangeText={onChangeNumber}
-                  placeholder="********"
+              <InputNumeric
+                minValue= {8}
+                maxValue={8}
+                placeholder={"*******"}
               />
             </View>
           </View>
 
 
           <View style={styles.contentButton}>
-            <TouchableOpacity style={styles.button}>
-              <Text style={styles.textButton}>Salvar</Text>
-            </TouchableOpacity>
-
-            <TouchableOpacity style={styles.buttonClean}>
-              <Text style={styles.textButtonClean}>Alterar dados</Text>
-            </TouchableOpacity>
+            <Button TextButton={'Alterar dados'}/>
           </View>
         </View>
     </View>
@@ -61,85 +64,55 @@ export function Perfil() {
 
 const styles = StyleSheet.create({
   container: {
-    flex: 1,
+    height: hp(100),
     justifyContent: "center",
     minWidth: "100%",
+    minHeight: "100%",
+    paddingHorizontal: wp(5),
     marginHorizontal: "auto",
-    marginVertical: "auto",
     backgroundColor: "#fff"
   },
   main: {
-    paddingHorizontal: 20
+    width: wp(90)
   },
   title: {
-    width: "100%",
     color: "#003B52",
-    fontSize: 40,
+    fontSize: hp(3.8),
+    marginTop: hp(2),
+    marginBottom: hp(4),
     fontWeight: "bold",
     textAlign: "center"
   },
   contentInput: {
-    marginTop: 60,
-    marginBottom: 80
+    width: wp(90)
   },
   boxInput: {
-    width: "100%",
-    marginBottom: 18
+    width: wp(90),
+    marginBottom: hp(2)
   },
   label: {
     width: "100%",
     color: "#005A7D",
-    fontSize: 23,
+    fontSize: hp(3),
     marginLeft: 7,
     marginBottom: 10,
     textAlign: "justify"
   },
-  input: {
-    width: "100%",
-    fontSize: 23,
-    height: 60,
-    padding: 10,
-    justifyContent: 'center',
-    alignItems: 'center',
-    borderWidth: 1, // Largura da borda
-    borderColor: '#BFBFBF', // Cor da borda
-    borderRadius: 10, // Arredondar cantos da borda
-  },
   contentButton: {
     width: "100%",
-    flexDirection: 'row',
-    marginTop: 30,
+    flexDirection: 'column',
+    marginVertical: hp(10),
     marginHorizontal: "auto"
   },
   button: {
-    width: "30%",
-    backgroundColor: "#005A7D",
-    paddingVertical: 15,
-    paddingHorizontal: 15,
-    borderRadius: 10,
+    position: "absolute",
+    bottom: hp(0),
+    width: wp(90),
     marginHorizontal: "auto"
-  },
-  buttonClean: {
-    width: "50%",
-    backgroundColor: "#fff",
-    paddingVertical: 15,
-    paddingHorizontal: 15,
-    borderRadius: 10,
-    marginHorizontal: "auto",
-    borderWidth: 1, // Largura da borda
-    borderColor: '#BFBFBF', // Cor da borda
-    borderRadius: 10, // Arredondar cantos da borda
   },
   textButton: {
     color: "#fff",
-    fontSize: 25,
-    padding: 0,
-    fontWeight: "bold",
-    textAlign: "center",
-  },
-  textButtonClean: {
-    color: "#005A7D",
-    fontSize: 25,
+    fontSize: hp(3),
     padding: 0,
     fontWeight: "bold",
     textAlign: "center",

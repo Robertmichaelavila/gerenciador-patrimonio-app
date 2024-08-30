@@ -1,29 +1,60 @@
-import { StatusBar, StyleSheet, Text, View, TextInput ,TouchableOpacity } from "react-native";
+import { useState } from "react";
+import { 
+  StatusBar, 
+  StyleSheet, 
+  Text, 
+  View, 
+  TextInput,
+  TouchableOpacity, 
+  Dimensions 
+} from "react-native";
+
+import {widthPercentageToDP as wp, heightPercentageToDP as hp} from 'react-native-responsive-screen';
+const {height, width} = Dimensions.get("window")
+
+import { Button } from "../../components/Form/button/Button"
+import AsyncStorage from '@react-native-async-storage/async-storage';
+import { AntDesign } from '@expo/vector-icons';
 
 export function CadastroNome({ navigation }) {
+  const [nome, setNome] = useState(''); 
+
+  const handleSubmit = async () => {
+    try {
+      await AsyncStorage.setItem('@name', nome);
+      navigation.navigate('menuPrincipal');
+    } catch (error) {
+      console.error('Erro ao salvar os dados no AsyncStorage:', error);
+    }
+  };
+
   return (
     <View style={styles.container}>
       <StatusBar backgroundColor={"#005A7D"}/>
+      {/* <TouchableOpacity style={styles.icon} onPress={ () => navigation.navigate('login') }>
+        <AntDesign name="arrowleft" size={30} color="black" />
+      </TouchableOpacity> */}
         <View style={styles.main}>
           <View style={styles.contentTitle}>
-            <Text style={styles.title}>Qual o seu nome?</Text>
-            <Text style={styles.subtitle}>Precisamos do seu nome para uma melhor identificação.</Text>
+            <Text style={styles.title}>Digite o seu nome?</Text>
+            <Text style={styles.subtitle}>Precisamos do seu nome para uma melhor identificação e experiêcia para você.</Text>
           </View>
 
           <View style={styles.contentInput}>
             <TextInput
                 style={styles.input}
-                minHeight= {20}
-                maxLength={50}
-                //onChangeText={onChangeNumber}
-                placeholder="Nome Completo"
-            />
+                value={nome}
+                onChangeText={setNome}
+                minValue= {30}
+                maxValue={50}
+                placeholder={"Nome e sobrenome"}
+              />
           </View>
 
 
-          <TouchableOpacity style={styles.button} onPress={ () => navigation.navigate('cadastroEmail') }>
-            <Text style={styles.textButton}>Avançar</Text>
-          </TouchableOpacity>
+          <View style={styles.button}>
+            <Button TextButton={'Entrar'} onpress={handleSubmit}/>
+          </View>
         </View>
     </View>
   );
@@ -31,62 +62,56 @@ export function CadastroNome({ navigation }) {
 
 const styles = StyleSheet.create({
   container: {
-    flex: 1,
+    height: hp(100),
     justifyContent: "center",
-    minWidth: "100%",
+    paddingHorizontal: wp(5),
     marginHorizontal: "auto",
     marginVertical: "auto",
     backgroundColor: "#fff"
   },
   main: {
-    paddingHorizontal: 20
+    width: wp(90)
   },
   contentTitle: {
-    alignItems: "flex-start"
+    alignItems: "flex-start",
+    marginTop: hp(5)
   },
   title: {
     color: "#003B52",
-    fontSize: 45,
+    fontSize: hp(4),
     fontWeight: "bold",
     textAlign: "justify"
   },
   subtitle: {
     color: "#005A7D",
-    fontSize: 24,
+    fontSize: hp(3),
     marginTop: 10,
     textAlign: "justify"
   },
-  contentInput: {
-    width: "100%",
-    marginTop: 90,
-    marginBottom: 100
-  },
   input: {
-    width: "100%",
-    fontSize: 23,
-    height: 60,
-    padding: 10,
+    width: wp(90),
+    fontSize: hp(2.5),
+    padding: 15,
     justifyContent: 'center',
     alignItems: 'center',
     borderWidth: 1, // Largura da borda
     borderColor: '#BFBFBF', // Cor da borda
     borderRadius: 10, // Arredondar cantos da borda
   },
+  contentInput: {
+    width: wp(90),
+    marginTop: hp(10),
+    marginBottom: hp(40)
+  },
   button: {
-    color: "#000",
-    backgroundColor: "#005A7D",
-    paddingVertical: 15,
-    paddingHorizontal: 15,
-    borderRadius: 10,
-    width: "60%",
-    marginTop: 150,
+    position: "absolute",
+    bottom: hp(0),
+    width: wp(90),
     marginHorizontal: "auto"
   },
-  textButton: {
-    color: "#fff",
-    fontSize: 25,
-    padding: 0,
-    fontWeight: "bold",
-    textAlign: "center",
+  icon: {
+    position: "absolute",
+    marginLeft: wp(5),
+    top: hp(4.5)
   }
 });

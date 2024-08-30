@@ -1,4 +1,15 @@
-import { StatusBar, StyleSheet, Text, View, Image, TouchableOpacity } from "react-native";
+import { 
+  StatusBar, 
+  StyleSheet,
+  Text, 
+  View, 
+  Image, 
+  TouchableOpacity, 
+  Dimensions 
+} from "react-native";
+
+import {widthPercentageToDP as wp, heightPercentageToDP as hp} from 'react-native-responsive-screen';
+const {height, width} = Dimensions.get("window")
 
 export function PageInitial({ navigation }) {
   return (
@@ -7,8 +18,8 @@ export function PageInitial({ navigation }) {
         <View style={styles.main}>
             <Image style={styles.icone} source={require('../../assets/img/icon_principal.png')} />
 
-            <TouchableOpacity style={styles.button} onPress={ () => navigation.navigate('login') }>
-                <Text style={styles.textButton}>Entrar</Text>
+            <TouchableOpacity style={styles.button} onPress={ () => navigation.navigate('cadastroNome') }>
+                <Text style={styles.textButton}>Começar</Text>
             </TouchableOpacity>
         </View>
     </View>
@@ -17,50 +28,36 @@ export function PageInitial({ navigation }) {
 
 const styles = StyleSheet.create({
   container: {
-    flex: 1,
+    height: hp(100),
     justifyContent: "center",
+    paddingHorizontal: wp(5),
     minWidth: "100%",
     marginHorizontal: "auto", 
     marginVertical: "auto",
     backgroundColor: "#fff"
   },
   main: {
-    paddingHorizontal: 20
-  },
-  title: {
-    color: "#003B52",
-    fontSize: 45,
-    fontWeight: "bold",
-    textAlign: "justify"
-  },
-  subtitle: {
-    width: "100%",
-    color: "#005A7D",
-    fontSize: 24,
-    marginTop: 10,
-    textAlign: "justify"
+    width: wp(90)
   },
   icone: {
-    width: 300,
-    height: 300,
+    width: wp(30),
+    height: hp(30),
+    marginTop: hp(15),
     marginHorizontal: "auto",
-    marginTop: 100,
-    marginBottom: 100,
   },
   button: {
     color: "#000",
     backgroundColor: "#005A7D",
-    paddingVertical: 15,
-    paddingHorizontal: 15,
+    paddingVertical: hp(2),
+    paddingHorizontal: wp(2),
     borderRadius: 10,
-    width: "80%",
-    marginTop: 60,
+    width: wp(50),
+    marginTop: hp(25),
     marginHorizontal: "auto"
   },
   textButton: {
     color: "#fff",
-    fontSize: 25,
-    padding: 0,
+    fontSize: hp(4),
     fontWeight: "bold",
     textAlign: "center",
   }

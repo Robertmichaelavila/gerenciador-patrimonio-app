@@ -1,4 +1,10 @@
-import { StatusBar, StyleSheet, Text, View, Image } from "react-native";
+import { 
+  StatusBar, 
+  StyleSheet, 
+  Text, 
+  View, 
+  Image 
+} from "react-native";
 
 export function Load() {
   return (
